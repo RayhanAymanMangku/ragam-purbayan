@@ -6,8 +6,7 @@ import Link from "next/link"
 
 
 
-const page = async () => {
-//   const initialCrafts = await getCraftByCategory("logam")
+const CraftPage = async () => {
 
   return (
     <div className="">
@@ -59,4 +58,4 @@ async function CraftGrid({ category }: { category: string }) {
   )
 }
 
-export default page
+export default CraftPage
