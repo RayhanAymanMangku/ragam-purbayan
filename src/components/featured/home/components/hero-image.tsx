@@ -3,9 +3,10 @@ import { HeliosFont } from "@/lib/utils"
 
 interface HeroImageProps {
   src: string
+  title: string
 }
 
-const HeroImage = ({ src }: HeroImageProps) => {
+const HeroImage = ({ src, title }: HeroImageProps) => {
   return (
     <div className="relative space-y-8">
       <Image
@@ -22,7 +23,7 @@ const HeroImage = ({ src }: HeroImageProps) => {
         <h1
           className={`relative text-4xl md:text-6xl lg:text-7xl font-bold text-white text-center max-w-6xl leading-tight px-8 py-6 ${HeliosFont}`}
         >
-          Jelajahi Ragam Kerajinan di Kelurahan Purbayan
+          {title}
         </h1>
 
       </div>

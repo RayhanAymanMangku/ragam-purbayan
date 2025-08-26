@@ -3,15 +3,16 @@ import React, { useState, useEffect } from 'react'
 import {
     Table,
     TableBody,
-    // TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { getAllCraft } from '../services/craft.service'
-import {  CraftDisplay } from '../types/Craft'
-// import Image from 'next/image'
+import { deleteCraftById, getAllCraft } from '../services/craft.service'
+import { CraftDisplay } from '../types/Craft'
+import { Button } from '@/components/ui/button'
+import { Edit, Trash } from 'lucide-react'
+import Link from 'next/link'
 const DashboardAssetsTableList = () => {
     const [crafts, setCrafts] = useState<CraftDisplay[]>([])
 
@@ -40,6 +41,19 @@ const DashboardAssetsTableList = () => {
         fetchCrafts();
     }, [])
 
+    const handleDelete = async (id: string) => {
+        const confirmed = confirm("Are you sure you want to delete this craft?");
+        if (!confirmed) return;
+
+        try {
+            await deleteCraftById({ id });
+            setCrafts((prev) => prev.filter((craft) => craft.id !== id));
+        } catch (error) {
+            console.error("Failed to delete craft:", error);
+        }
+    }
+
+
     return (
         <div className="overflow-hidden rounded-sm">
             <Table className='rounded-sm'>
@@ -49,7 +63,8 @@ const DashboardAssetsTableList = () => {
                         <TableHead>Name</TableHead>
                         <TableHead>Category</TableHead>
                         <TableHead>Phone</TableHead>
-                        <TableHead className="text-right">Owner</TableHead>
+                        <TableHead>Owner</TableHead>
+                        <TableHead>Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -61,7 +76,17 @@ const DashboardAssetsTableList = () => {
                                 <TableCell>{craft.type}</TableCell>
                                 <TableCell>{craft.phone}</TableCell>
                                 <TableCell>{craft.owner}</TableCell>
-                        
+                                <TableCell className='flex gap-2'>
+                                    <Link href={`/dashboard/craft/edit/${craft.id}`}>
+                                        <Button variant="outline" size="icon">
+                                            <Edit className="w-4 h-4" />
+                                        </Button>
+                                    </Link>
+
+                                    <Button variant="destructive" size="icon" onClick={() => handleDelete(craft.id)}>
+                                        <Trash className="w-4 h-4" />
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))
                     ) : (

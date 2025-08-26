@@ -4,21 +4,23 @@ import GalleryCard from "@/components/featured/home/components/gallery-card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
-
-
 const CraftPage = async () => {
-
   return (
     <div className="">
       <div className="flex flex-row w-full">
         <Tabs defaultValue="logam" className="w-full">
-          <TabsList className="">
-            {craftTypeOptions.map((type) => (
-              <TabsTrigger key={type.value} value={type.value}>
-                {type.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl md:text-4xl">Cari Berdasarkan Kategori</h1>
+            <div className="w-full overflow-x-auto">
+              <TabsList className="w-full justify-start min-w-fit">
+                {craftTypeOptions.map((type) => (
+                  <TabsTrigger key={type.value} value={type.value} className="whitespace-nowrap">
+                    {type.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+          </div>
 
           {craftTypeOptions.map((type) => (
             <TabsContent key={type.value} value={type.value} className="mt-6">

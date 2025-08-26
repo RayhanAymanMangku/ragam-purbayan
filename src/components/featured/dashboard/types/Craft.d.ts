@@ -10,6 +10,18 @@ export type Craft = {
     slug: string
 }
 
+export type CraftWithoutSlug = {
+    id: string
+    name: string
+    type: string
+    owner: string
+    email: string
+    phone: string
+    maps: string
+    images: string[]
+    description: string
+}
+
 export type CraftDisplay = {
         id: string,
         name: string,

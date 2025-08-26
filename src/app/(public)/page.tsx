@@ -2,6 +2,8 @@ import { getAllCraftGallery } from "@/components/featured/dashboard/services/cra
 import CardLocation from "@/components/featured/home/components/card-location";
 import GalleryCard from "@/components/featured/home/components/gallery-card";
 import HeroImage from "@/components/featured/home/components/hero-image";
+import { Button } from "@/components/ui/button";
+import { MoveRight } from "lucide-react";
 import Link from "next/link";
 
 
@@ -14,6 +16,7 @@ export default async function Home() {
     <main className="flex flex-col gap-8">
       <section>
         <HeroImage
+        title="Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
           src="/assets/kompleks-makam-kotagede.jpg"
         />
       </section>
@@ -25,8 +28,9 @@ export default async function Home() {
             <div className="w-full md:w-[70%]">
               <h1 className='text-2xl md:text-4xl md:w-3/5'>Kerajinan Lokal di Kelurahan Purbayan</h1>
             </div>
-            <div className="md:w-[30%]">
-              <p className='text-gray-500 text-sm'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima reiciendis molestiae, earum deleniti inventore quod velit provident ipsa!</p>
+            <div className="md:w-[30%] justify-end flex">
+              <p className="text-gray-500 text-justify">Temukan beragam kerajinan lokal dengan berbagai kategori yang ada di Kelurahan Purbayan</p>
+
             </div>
           </div>
           <div className="grid md:grid-cols-4 gap-6 w-full">
@@ -48,6 +52,12 @@ export default async function Home() {
               </div>
             )}
           </div>
+          <Link href="/craft">
+            <Button variant="outline" className="bg-white text-black border rounded-sm border-black w-fit ">
+              Jelajahi
+              <MoveRight />
+            </Button>
+          </Link>
         </div>
 
       </section>

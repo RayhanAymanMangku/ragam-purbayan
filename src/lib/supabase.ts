@@ -12,14 +12,16 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
  * @returns Promise yang resolve dengan URL publik dari gambar.
  */
 export const uploadImage = async (file: File): Promise<string> => {
-    // Membuat nama file yang unik untuk menghindari konflik
     const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}.${fileExt}`;
-    const filePath = `public/vendor/${fileName}`; // Path lengkap di dalam bucket
+    
+    // PERBAIKAN: Tambahkan string acak untuk memastikan nama file selalu unik
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const fileName = `${Date.now()}-${randomString}.${fileExt}`;
+    
+    const filePath = `public/vendor/${fileName}`;
 
-    // Proses unggah ke bucket 'ragam-purbayan'
     const { error: uploadError } = await supabase.storage
-        .from("ragam-purbayan") // Ganti dengan nama bucket Anda
+        .from("ragam-purbayan")
         .upload(filePath, file, {
             cacheControl: "3600",
             upsert: false,
@@ -30,7 +32,6 @@ export const uploadImage = async (file: File): Promise<string> => {
         throw new Error("Gagal mengunggah gambar.");
     }
 
-    // Mengambil URL publik dari file yang baru saja diunggah
     const { data } = supabase.storage
         .from("ragam-purbayan")
         .getPublicUrl(filePath);
@@ -47,7 +48,6 @@ export const uploadImage = async (file: File): Promise<string> => {
  * @param publicUrl - URL publik lengkap dari file yang akan dihapus.
  */
 export const deleteImage = async (publicUrl: string) => {
-    // Ekstrak path file dari URL lengkap untuk proses penghapusan
     const bucketName = "ragam-purbayan";
     const filePath = publicUrl.split(`/${bucketName}/`)[1];
 

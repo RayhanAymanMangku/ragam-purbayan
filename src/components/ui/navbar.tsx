@@ -54,11 +54,11 @@ export function Navbar() {
                                 Jelajahi berbagai fitur yang tersedia
                             </SheetDescription>
                         </SheetHeader>
-                        <div className="grid gap-4 py-4">
+                        <div className="grid gap-4 p-4">
                             <div className="grid grid-cols-1 gap-2">
                                 {navLink.map((item) => (
                                     <Link href={item.href} key={item.name}>
-                                        <Button variant="ghost" className="justify-start">
+                                        <Button variant="ghost" className="justify-start w-full">
                                             {item.name}
                                         </Button>
                                     </Link>
@@ -79,14 +79,18 @@ export function Navbar() {
                             className='object-cover w-6 h-8 md:w-8 md:h-12'
                             priority
                         />
-                        <h1 className='text-sm md:text-lg font-semibold'>Kelurahan Purbayan</h1>
+                        <h1 className='text-sm md:text-lg font-semibold'>Purbayan Craft</h1>
                     </div>
                 </div>
 
                 {/* Right - Discovery Button */}
-                <Button variant="ghost" size="sm" className="border w-fit h-fit px-2 py-1 rounded-3xl bg-transparent text-black">
-                    Discovery
-                </Button>
+
+                <Link href="/craft">
+                    <Button variant="ghost" size="sm" className="border w-fit h-fit px-2 py-1 rounded-3xl bg-transparent text-black hidden md:block">
+                        Jelajahi Kerajinan
+                    </Button>
+                </Link>
+
             </div>
         </nav>
     )

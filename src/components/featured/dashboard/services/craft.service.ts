@@ -1,31 +1,38 @@
 "use server"
 
 import { generateSlug } from "@/lib/utils";
-// import { generateSlug } from "@/lib/utils";
 import prisma from "../../../../../lib/prisma";
-import { Craft } from "../types/Craft";
+import { Craft, CraftWithoutSlug } from "../types/Craft";
 const prismaDb = prisma;
 
 export async function createCraft(params: Craft) {
-    const slug = generateSlug(params.name);
-    const data = await prismaDb.craft.create({
-        data: {
-            name: params.name,
-            type: params.type,
-            owner: params.owner,
-            email: params.email,
-            phone: params.phone,
-            maps: params.maps,
-            images: params.images,
-            description: params.description,
-            slug: slug,
-        },
-    });
-    return data;
+    try {
+        const slug = generateSlug(params.name);
+        const data = await prismaDb.craft.create({
+            data: {
+                name: params.name,
+                type: params.type,
+                owner: params.owner,
+                email: params.email,
+                phone: params.phone,
+                maps: params.maps,
+                images: params.images,
+                description: params.description,
+                slug: slug,
+            },
+        });
+        return data;
+    } catch (error) {
+        console.error("Database Error:", error);
+        return;
+    }
 }
 
-export async function getAllCraftGallery() {
-    const data = await prismaDb.craft.findMany({
+export async function getCraftById(id: string) {
+    const data = await prismaDb.craft.findUnique({
+        where: {
+            id: id,
+        },
         select: {
             id: true,
             name: true,
@@ -33,9 +40,72 @@ export async function getAllCraftGallery() {
             description: true,
             images: true,
             slug: true,
+            email: true,
+            phone: true,
+            maps: true,
+            owner: true,
         }
     });
     return data;
+    
+}
+
+export async function updateCraft(id: string, params: CraftWithoutSlug) {
+    try {
+        const data = await prismaDb.craft.update({
+            where: {
+                id: id,
+            },
+            data: {
+                // id: id,
+                name: params.name,
+                type: params.type,
+                owner: params.owner,
+                email: params.email,
+                phone: params.phone,
+                maps: params.maps,
+                images: params.images,
+                description: params.description,
+            },
+        });
+        return data;
+    } catch (error) {
+        console.error("Database Error:", error);
+        return;
+    }
+}
+
+export async function deleteCraftById(params: { id: string }) {
+    try {
+        const data = await prismaDb.craft.delete({
+            where: {
+                id: params.id,
+            },
+        });
+        return data;
+    } catch (error) {
+        console.error("Database Error:", error);
+        return;
+    }
+}
+
+export async function getAllCraftGallery() {
+    try {
+        const data = await prismaDb.craft.findMany({
+            select: {
+                id: true,
+                name: true,
+                type: true,
+                description: true,
+                images: true,
+                slug: true,
+            }
+        });
+        return data;
+    } catch (error) {
+        console.error("Database Error:", error);
+        return [];
+    }
 }
 
 export async function getCraftBySlug(slug: string) {
@@ -53,7 +123,7 @@ export async function getCraftBySlug(slug: string) {
             email: true,
             phone: true,
             maps: true,
-            owner: true, 
+            owner: true,
         }
     });
     return data;
