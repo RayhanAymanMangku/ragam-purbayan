@@ -3,9 +3,9 @@ import { getCraftById } from '@/components/featured/dashboard/services/craft.ser
 
 import React from 'react';
 
-const AssetsEditPage = async ({ params }: { params: { id: string } }) => {
-  
-  const craftItem = await getCraftById(params.id);
+const AssetsEditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+
+  const craftItem = await getCraftById((await params).id);
 
   if (!craftItem) {
     return (
