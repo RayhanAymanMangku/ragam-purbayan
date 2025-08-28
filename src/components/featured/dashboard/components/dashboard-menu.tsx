@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
-// import { useState } from 'react'
-import { Landmark, LogOutIcon } from 'lucide-react'
+import Image from 'next/image'
+import {  LogOutIcon } from 'lucide-react'
 import {
     Sidebar,
     SidebarContent,
@@ -17,14 +17,21 @@ import { sidebarItem } from '../lib/constants'
 
 const DashboardMenu = ({ currentPath }: { currentPath: string }) => {
     // const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-    
+
     return (
         <>
             <Sidebar className="border-r">
                 <SidebarHeader className="border-b p-4 h-[61px] bg-white">
-                    <div className="flex gap-1 items-center">
-                       <Landmark className="w-6 h-6 text-orange-500" />
-                        <h1 className="text-lg font-semibold pt-2">Purbayan</h1>
+                    <div className="flex gap-2 items-center">
+                        <Image
+                            src="/assets/logo-pemkot.png"
+                            width={100}
+                            height={100}
+                            alt='logo'
+                            className='object-cover w-6 h-8 md:w-6 md:h-8'
+                            priority
+                        />
+                        <h1 className='text-sm md:text-lg font-semibold'>Purbayan Craft</h1>
                     </div>
                 </SidebarHeader>
                 <SidebarContent className="p-4 bg-white">

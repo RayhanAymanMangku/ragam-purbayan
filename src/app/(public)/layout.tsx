@@ -1,3 +1,4 @@
+import Footer from "@/components/ui/footer";
 import { Navbar } from "@/components/ui/navbar";
 import { Metadata } from "next";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
       <div className="p-4 md:p-8 min-h-screen">
         <main>{children}</main>
       </div>
+      <Footer/>
     </>
   );
 }
