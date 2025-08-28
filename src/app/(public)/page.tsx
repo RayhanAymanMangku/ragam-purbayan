@@ -28,7 +28,7 @@ export default async function Home() {
       <section>
         <HeroImage
         title="Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
-          src="/assets/kompleks-makam-kotagede.jpg"
+          src="/assets/depan.JPG"
         />
       </section>
 

@@ -20,7 +20,7 @@ const GalleryCard = ({ imgSrc, cardTitle, cardDescription, badgeType }: GalleryC
                     width={300}
                     height={300}
                     priority
-                    className='rounded-md object-cover w-full h-80 hover:shadow-md transition-all duration-200'
+                    className='rounded-md object-cover w-full h-80 hover:shadow-md transition-all duration-200 hover:brightness-75'
                 />
             </CardContent>
             <div className='flex flex-col p-0 gap-4'>
