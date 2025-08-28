@@ -4,7 +4,7 @@ import GalleryCard from "@/components/featured/home/components/gallery-card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
-export async function generateMetaData() {
+export async function generateMetadata() {
   const craft = await  getAllCraftGallery();
   return {
     openGraph: {
