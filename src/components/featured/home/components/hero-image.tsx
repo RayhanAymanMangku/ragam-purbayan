@@ -10,7 +10,7 @@ const HeroImage = ({ src, title }: HeroImageProps) => {
   return (
     <div className="relative space-y-8">
       <Image
-        src={src || "/placeholder.svg"}
+        src={src || "/"}
         alt="main"
         width={1280}
         height={720}

@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 
-
-
 export default async function Home() {
 
   const fetchData = await getAllCraftGallery();
@@ -54,7 +52,7 @@ export default async function Home() {
           </div>
           <Link href="/craft">
             <Button variant="outline" className="bg-white text-black border rounded-sm border-black w-fit ">
-              Jelajahi
+              Jelajahi Kerajinan
               <MoveRight />
             </Button>
           </Link>

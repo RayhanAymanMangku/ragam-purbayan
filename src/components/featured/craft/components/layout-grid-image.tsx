@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Card as UI_Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -57,7 +57,7 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
           </div>
         </div>
         <div className="w-full md:w-[30%] grid gap-4">
-          <UI_Card className="shadow-sm border-gray-300">
+          <Card className="shadow-none border-gray-300">
             <CardContent className="space-y-4">
               <CardTitle>Hubungi Kami</CardTitle>
               <CardDescription>
@@ -75,9 +75,9 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
                 </div>
               </CardDescription>
             </CardContent>
-          </UI_Card>
+          </Card>
 
-          <UI_Card className="shadow-none border-none p-0">
+          <Card className="shadow-none border-none p-0">
             <CardContent className="space-y-4 px-0">
               <CardDescription className="p-0">
                 <iframe
@@ -90,7 +90,7 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
                 />
               </CardDescription>
             </CardContent>
-          </UI_Card>
+          </Card>
 
           <Link href={`https://wa.me/${mainCard.phone}`}>
             <Button

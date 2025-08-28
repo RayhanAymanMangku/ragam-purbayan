@@ -1,8 +1,19 @@
 import { craftTypeOptions } from "@/components/featured/dashboard/lib/constants"
-import { getCraftByCategory } from "@/components/featured/dashboard/services/craft.service"
+import { getAllCraftGallery, getCraftByCategory } from "@/components/featured/dashboard/services/craft.service"
 import GalleryCard from "@/components/featured/home/components/gallery-card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
+
+export async function generateMetaData() {
+  const craft = await  getAllCraftGallery();
+  return {
+    openGraph: {
+      title: 'Kerajinan',
+      description: craft.map(item => item.name).join(' | ') || 'Kerajinan',
+      images: [...craft.map(item => item.images)],
+    }
+  }
+}
 
 const CraftPage = async () => {
   return (

@@ -5,7 +5,6 @@ import HeroImage from "@/components/featured/home/components/hero-image"
 const page = () => {
     return (
         <div className="flex-col gap-6">
-           
             <HeroImage
                 title="Profil Kelurahan Purbayan"
                 src="/assets/purbayan-profile.jpg"
