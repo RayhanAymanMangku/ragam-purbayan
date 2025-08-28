@@ -4,11 +4,24 @@ import GalleryCard from "@/components/featured/home/components/gallery-card";
 import HeroImage from "@/components/featured/home/components/hero-image";
 import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
+import { unstable_cache } from "next/cache";
 import Link from "next/link";
+
+const craftData = getAllCraftGallery()
+
+const getCraftData = unstable_cache(
+  async () => {
+    return await craftData
+  },
+  ['craft'], 
+  {
+    revalidate: 120,
+  }
+)
 
 export default async function Home() {
 
-  const fetchData = await getAllCraftGallery();
+  const fetchData = await getCraftData();
 
   return (
     <main className="flex flex-col gap-8">
