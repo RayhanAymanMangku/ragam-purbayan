@@ -68,7 +68,7 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className={`mb-4 text-sm font-semibold uppercase tracking-wider text-gray-900 `}>Tautan Cepat</h3>
+                        <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Tautan Cepat</h3>
                         <ul className="space-y-2">
                             {nav.map((item) => {
                                 return (
@@ -85,7 +85,7 @@ export default function Footer() {
 
                     {/* Services */}
                     <div>
-                        <h3 className={`mb-4 text-sm font-semibold uppercase tracking-wider text-gray-900 `}>Kerajinan Lokal</h3>
+                        <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Kerajinan Lokal</h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link href="/craft" className="text-sm text-gray-600 hover:text-gray-900">
