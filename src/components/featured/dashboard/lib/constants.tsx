@@ -15,17 +15,17 @@ export const sidebarItem = [
     },
 ]
 
-export const dashboardCardData = [
-    {
-        id: 1,
-        title: "Total Crafts",
-        value: 40,
-        description: "Total number of craft registered",
-        icon: <Layers className="h-4 w-4 text-orange-500" />,
-        color: "bg-orange-100"
-    },
+// export const dashboardCardData = [
+//     {
+//         id: 1,
+//         title: "Total Crafts",
+//         value:40,
+//         description: "Total number of craft registered",
+//         icon: <Layers className="h-4 w-4 text-orange-500" />,
+//         color: "bg-orange-100"
+//     },
    
-]
+// ]
 
 export const craftTypeOptions = [
     {

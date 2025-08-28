@@ -89,6 +89,16 @@ export async function deleteCraftById(params: { id: string }) {
     }
 }
 
+export async function countCraft() {
+    try {
+        const count = await prismaDb.craft.count();
+        return count;
+    } catch (error) {
+        console.error("Database Error:", error);
+        return;
+    }
+}
+
 export async function getAllCraftGallery() {
     try {
         const data = await prismaDb.craft.findMany({
