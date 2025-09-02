@@ -5,13 +5,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
 export async function generateMetadata() {
-  const craft = await  getAllCraftGallery();
+  const craft = await getAllCraftGallery()
   return {
     openGraph: {
-      title: 'Kerajinan',
-      description: craft.map(item => item.name).join(' | ') || 'Kerajinan',
-      images: [...craft.map(item => item.images)],
-    }
+      title: "Kerajinan",
+      description: craft.map((item) => item.name).join(" | ") || "Kerajinan",
+      images: [...craft.map((item) => item.images)],
+    },
   }
 }
 
@@ -23,9 +23,13 @@ const CraftPage = async () => {
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl md:text-4xl">Cari Berdasarkan Kategori</h1>
             <div className="w-full overflow-x-auto">
-              <TabsList className="w-full justify-start min-w-fit">
+              <TabsList className="w-full justify-start min-w-fit bg-transparent border-b border-gray-200 rounded-none p-0 h-auto">
                 {craftTypeOptions.map((type) => (
-                  <TabsTrigger key={type.value} value={type.value} className="whitespace-nowrap">
+                  <TabsTrigger
+                    key={type.value}
+                    value={type.value}
+                    className="whitespace-nowrap bg-transparent border-0 rounded-none px-4 py-3 text-gray-600 hover:text-gray-900 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:shadow-none"
+                  >
                     {type.label}
                   </TabsTrigger>
                 ))}

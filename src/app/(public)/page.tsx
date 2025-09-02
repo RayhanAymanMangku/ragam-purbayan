@@ -3,6 +3,7 @@ import CardLocation from "@/components/featured/home/components/card-location";
 import GalleryCard from "@/components/featured/home/components/gallery-card";
 import HeroImage from "@/components/featured/home/components/hero-image";
 import { Button } from "@/components/ui/button";
+import ScrollTopButton from "@/components/ui/scroll-top-button";
 import { MoveRight } from "lucide-react";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
@@ -13,7 +14,7 @@ const getCraftData = unstable_cache(
   async () => {
     return await craftData
   },
-  ['craft'], 
+  ['craft'],
   {
     revalidate: 120,
   }
@@ -25,9 +26,13 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col gap-8">
+      <div className="fixed bottom-8 right-8 z-50">
+        <ScrollTopButton />
+      </div>
       <section>
         <HeroImage
-        title="Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
+          isDisplayed={true}
+          title="Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
           src="/assets/depan.JPG"
         />
       </section>
@@ -44,28 +49,30 @@ export default async function Home() {
 
             </div>
           </div>
-          <div className="grid md:grid-cols-4 gap-6 w-full">
-            {fetchData && fetchData.length > 0 ? (
-              fetchData.map((item) => (
-                <Link key={item.id} href={`/craft/${item.slug}`}>
-                  <GalleryCard
-                    imgSrc={item.images[0]}
-                    cardTitle={item.name}
-                    cardDescription={item.description}
-                    badgeType={item.type}
-                  />
-                </Link>
-              ))
-            ) : (
-              // Tampilkan div ini jika tidak ada data
-              <div className="col-span-4 text-center text-gray-500 py-10">
-                <p>Tidak ada kerajinan yang tersedia untuk ditampilkan saat ini.</p>
-              </div>
-            )}
-          </div>
+          <section id="gallery">
+            <div className="grid md:grid-cols-4 gap-6 w-full">
+              {fetchData && fetchData.length > 0 ? (
+                fetchData.map((item) => (
+                  <Link key={item.id} href={`/craft/${item.slug}`}>
+                    <GalleryCard
+                      imgSrc={item.images[0]}
+                      cardTitle={item.name}
+                      cardDescription={item.description}
+                      badgeType={item.type}
+                    />
+                  </Link>
+                ))
+              ) : (
+                // Tampilkan div ini jika tidak ada data
+                <div className="col-span-4 text-center text-gray-500 py-10">
+                  <p>Tidak ada kerajinan yang tersedia untuk ditampilkan saat ini.</p>
+                </div>
+              )}
+            </div>
+          </section>
           <Link href="/craft">
             <Button variant="outline" className="bg-white text-black border rounded-sm border-black w-fit ">
-              Jelajahi Kerajinan
+              Selengkapnya
               <MoveRight />
             </Button>
           </Link>

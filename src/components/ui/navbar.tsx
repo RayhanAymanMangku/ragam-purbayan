@@ -71,26 +71,39 @@ export function Navbar() {
 
                 {/* Center - Logo */}
                 <div className="absolute left-1/2 transform -translate-x-1/2">
-                    <div className="flex gap-2 items-center">
-                        <Image
-                            src="/assets/logo-pemkot.png"
-                            width={100}
-                            height={100}
-                            alt='logo'
-                            className='object-cover w-6 h-8 md:w-8 md:h-12'
-                            priority
-                        />
-                        <h1 className={`text-sm md:text-lg font-semibold ${HeliosFont}`}>Purbayan Craft</h1>
+                    <div>
+                        <Link href="/" className='flex gap-2 items-center'>
+                            <Image
+                                src="/assets/logo-pemkot.png"
+                                width={100}
+                                height={100}
+                                alt='logo'
+                                className='object-cover w-6 h-8 md:w-8 md:h-12'
+                                priority
+                            />
+                            <h1 className={`text-sm md:text-lg font-semibold ${HeliosFont}`}>Purbayan Craft</h1>
+                        </Link>
                     </div>
                 </div>
 
-                {/* Right - Discovery Button */}
-
-                <Link href="/craft">
+                {/* <Link href="/craft">
                     <Button variant="ghost" size="sm" className="border w-fit h-fit px-2 py-1 rounded-3xl bg-transparent text-black hidden md:block">
                         Jelajahi Kerajinan
                     </Button>
-                </Link>
+                </Link> */}
+                <svg width="25" height="25" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="drop-shadow">
+                            <feDropShadow
+                                dx="1" dy="1" stdDeviation="4" floodColor="#000000" floodOpacity="0.2" />
+                        </filter>
+                    </defs>
+
+                    <g filter="url(#drop-shadow)">
+                        <path fill="#FF0000" d="M 0 50 A 50 50 0 0 1 100 50 Z" />
+                        <path fill="#FFFFFF" d="M 0 50 A 50 50 0 0 0 100 50 Z" />
+                    </g>
+                </svg>
 
             </div>
         </nav>

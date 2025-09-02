@@ -33,7 +33,7 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
               <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
                 <Image
                   src={mainCard?.thumbnail || "/placeholder.svg"}
-                  className="object-cover object-center h-full w-full"
+                  className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
                   alt="main image"
                   fill
                 />
@@ -46,7 +46,7 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
                   <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
                     <Image
                       src={card.thumbnail || "/placeholder.svg"}
-                      className="object-cover object-center h-full w-full"
+                      className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
                       alt={`thumbnail ${i + 1}`}
                       fill
                     />

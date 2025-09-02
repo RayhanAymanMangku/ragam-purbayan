@@ -33,8 +33,4 @@ export const craftTypeOptions = [
         value: "perak",
         label: "Perak"
     },
-    {
-        value: "lainnya",
-        label: "Lainnya"
-    },
 ]
