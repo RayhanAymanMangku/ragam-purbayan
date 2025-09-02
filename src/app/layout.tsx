@@ -1,7 +1,8 @@
 import "./globals.css";
-import { HeliosFont } from "@/lib/utils";
+import { cn, HeliosFont } from "@/lib/utils";
 import { Providers } from "./providers";
 import { Metadata } from "next";
+import { Inter } from 'next/font/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://purbayancraft.vercel.app"),
@@ -33,6 +34,9 @@ export const metadata: Metadata = {
   },
 }
 
+const inter = Inter({ subsets: ['latin'], variable: '--font-monument' })
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,7 +50,7 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" sizes="12x12" href="/assets/logo-pemkot.png"/>
       </head>
       <body
-        className={`${HeliosFont.variable} antialiased`}
+        className={cn("font-sans", HeliosFont.variable, inter.variable)}
       >
         <Providers>
           {children}
