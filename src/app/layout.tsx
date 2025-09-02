@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     default: "Purbayan Craft",
     template: "%s | Purbayan Craft",
   },
+  icons: {
+    icon: "/assets/logo-pemkot.png",
+  },
   openGraph: {
     description: "Purbayan Craft - Beragam Kerajinan Lokal Berkualitas dari Purbayan",
     images: [
