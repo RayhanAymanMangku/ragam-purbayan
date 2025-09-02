@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image"
-import { HeliosFont } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { MoveRight } from "lucide-react"
 
@@ -31,7 +30,7 @@ const HeroImage = ({ src, title, isDisplayed }: HeroImageProps) => {
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
         <h1
-          className={`relative text-2xl md:text-6xl lg:text-7xl font-bold text-white text-center max-w-6xl leading-tight px-8 py-6 ${HeliosFont}`}
+          className={`relative text-2xl md:text-6xl lg:text-7xl font-bold text-white text-center max-w-6xl leading-tight px-8 py-6`}
         >
           {title}
         </h1>

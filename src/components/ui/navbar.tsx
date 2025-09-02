@@ -12,8 +12,6 @@ import {
 } from "@/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
-import { HeliosFont } from '@/lib/utils'
-
 
 export function Navbar() {
     const navLink = [
@@ -78,10 +76,10 @@ export function Navbar() {
                                 width={100}
                                 height={100}
                                 alt='logo'
-                                className='object-cover w-6 h-8 md:w-8 md:h-12'
+                                className='object-cover w-6 h-10 md:w-8 md:h-12'
                                 priority
                             />
-                            <h1 className={`text-sm md:text-lg font-semibold ${HeliosFont}`}>Purbayan Craft</h1>
+                            <h1 className={`text-sm md:text-lg font-semibold`}>Purbayan Craft</h1>
                         </Link>
                     </div>
                 </div>

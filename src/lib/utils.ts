@@ -21,7 +21,7 @@ export function generateSlug(name: string): string {
   return `${baseSlug}-${randomString}`;
 }
 
-export const HeliosFont = localFont({
+export const heliosfont = localFont({
   src: [
     {
       path: '../../public/fonts/heliosext.woff',

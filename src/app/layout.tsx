@@ -1,5 +1,5 @@
 import "./globals.css";
-import { cn, HeliosFont } from "@/lib/utils";
+import { cn, heliosfont } from "@/lib/utils";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { Inter } from 'next/font/google'
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
 }
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-monument' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 
 export default function RootLayout({
@@ -50,7 +50,7 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" sizes="12x12" href="/assets/logo-pemkot.png"/>
       </head>
       <body
-        className={cn("font-sans", HeliosFont.variable, inter.variable)}
+        className={cn("font-sans", heliosfont.variable, inter.variable)}
       >
         <Providers>
           {children}
