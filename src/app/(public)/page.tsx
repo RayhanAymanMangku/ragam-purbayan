@@ -34,7 +34,7 @@ export default async function Home() {
 
       <section>
         <div className="flex flex-col gap-8 w-full">
-          <p>Galeri</p>
+          <p className="text-gray-500">Galeri</p>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="w-full md:w-[70%]">
               <h1 className='text-2xl md:text-4xl md:w-3/5'>Kerajinan Lokal di Kelurahan Purbayan</h1>
