@@ -19,18 +19,22 @@ export const sidebarItem = [
 export const craftTypeOptions = [
     {
         value: "logam",
-        label: "Logam"
+        label: "Logam",
+        color: "bg-gray-200"
     },
     {
         value: "kayu",
-        label: "Kayu"
+        label: "Kayu",
+        color: "bg-brown-200"
     },
     {
         value: "emas",
-        label: "Emas"
+        label: "Emas",
+        color: "bg-yellow-200"
     },
     {
         value: "perak",
-        label: "Perak"
+        label: "Perak",
+        color: "bg-gray-100"
     },
 ]

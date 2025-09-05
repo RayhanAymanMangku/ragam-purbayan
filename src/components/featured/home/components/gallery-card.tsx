@@ -7,9 +7,10 @@ interface GalleryCardProps {
   cardTitle: string
   cardDescription: string
   badgeType: string
+  badgeColor: string
 }
 
-const GalleryCard = ({ imgSrc, cardTitle, cardDescription, badgeType }: GalleryCardProps) => {
+const GalleryCard = ({ imgSrc, cardTitle, cardDescription, badgeType, badgeColor }: GalleryCardProps) => {
   return (
     <Card className="w-full rounded-none p-0 shadow-none border-none flex flex-col h-full">
       <CardContent className="p-0">
@@ -29,7 +30,7 @@ const GalleryCard = ({ imgSrc, cardTitle, cardDescription, badgeType }: GalleryC
             {cardDescription.split(" ").slice(0, 12).join(" ")}...
           </p>
         </div>
-        <Badge variant="secondary" className="self-start">
+        <Badge variant="secondary" className={`self-start ${badgeColor}`}>
           {badgeType}
         </Badge>
       </div>
