@@ -1,3 +1,4 @@
+import { craftTypeOptions } from "@/components/featured/dashboard/lib/constants";
 import { getAllCraftGallery } from "@/components/featured/dashboard/services/craft.service";
 import CardLocation from "@/components/featured/home/components/card-location";
 import GalleryCard from "@/components/featured/home/components/gallery-card";
@@ -55,6 +56,7 @@ export default async function Home() {
                 fetchData.map((item) => (
                   <Link key={item.id} href={`/craft/${item.slug}`}>
                     <GalleryCard
+                      badgeColor={craftTypeOptions.find((type) => type.value === item.type)?.color ?? "bg-secondary"}
                       imgSrc={item.images[0]}
                       cardTitle={item.name}
                       cardDescription={item.description}
