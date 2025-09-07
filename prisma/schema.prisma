@@ -29,5 +29,5 @@ model Craft {
   maps   String
   phone  String
   owner  String
-  type   String
+  type   String[]
 }

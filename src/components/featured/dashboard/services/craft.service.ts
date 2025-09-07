@@ -11,7 +11,7 @@ export async function createCraft(params: Craft) {
         const data = await prismaDb.craft.create({
             data: {
                 name: params.name,
-                type: params.type,
+                type: params.type, 
                 owner: params.owner,
                 email: params.email,
                 phone: params.phone,
@@ -57,7 +57,6 @@ export async function updateCraft(id: string, params: CraftWithoutSlug) {
                 id: id,
             },
             data: {
-                // id: id,
                 name: params.name,
                 type: params.type,
                 owner: params.owner,
@@ -70,7 +69,7 @@ export async function updateCraft(id: string, params: CraftWithoutSlug) {
         });
         return data;
     } catch (error) {
-        console.error("Database Error:", error);
+        console.error(" Error:", error);
         return;
     }
 }
@@ -142,7 +141,9 @@ export async function getCraftBySlug(slug: string) {
 export async function getCraftByCategory(type: string) {
     const data = await prisma.craft.findMany({
         where: {
-            type: type
+            type: {
+                has: type
+            }
         },
         select: {
             id: true,

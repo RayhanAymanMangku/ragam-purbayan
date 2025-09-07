@@ -5,36 +5,36 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu" // Diimpor untuk multi-select
 import Image from "next/image"
 import { Loader2, X } from "lucide-react"
 import { deleteImage, uploadImage } from "@/lib/supabase"
 import { CraftWithoutSlug } from "@/components/featured/dashboard/types/Craft"
-import { updateCraft } from "@/components/featured/dashboard/services/craft.service" 
+import { updateCraft } from "@/components/featured/dashboard/services/craft.service"
 import { useRouter } from "next/navigation"
 import { Textarea } from "@/components/ui/textarea"
 import { craftTypeOptions } from "@/components/featured/dashboard/lib/constants"
 
-// Tentukan tipe props yang diterima komponen ini
 interface AssetsEditFormProps {
-  initialData: CraftWithoutSlug;
+  // Asumsikan tipe ini sekarang memiliki `type` sebagai `string[]`
+  initialData: CraftWithoutSlug & { type: string | string[] }; 
 }
 
 const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
   const [selectedImages, setSelectedImages] = useState<File[]>([])
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
-  const [existingImageUrls, setExistingImageUrls] = useState<string[]>([]); 
+  const [existingImageUrls, setExistingImageUrls] = useState<string[]>([]);
+  // --- CHANGE 1: `type` sekarang menjadi array string ---
   const [formData, setFormData] = useState({
     id: initialData.id,
     name: "",
-    type: "",
+    type: [] as string[], // Diubah dari "" menjadi []
     owner: "",
     email: "",
     phone: "",
@@ -45,20 +45,28 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  // useEffect untuk mengisi form dengan data awal saat komponen dimuat
+  // --- CHANGE 2: `useEffect` diperbarui untuk menangani `type` sebagai array ---
   useEffect(() => {
     if (initialData) {
+      // Logika untuk memastikan `type` selalu menjadi array
+      let initialTypes: string[] = [];
+      if (Array.isArray(initialData.type)) {
+        initialTypes = initialData.type;
+      } else if (typeof initialData.type === 'string' && initialData.type) {
+        // Untuk kompatibilitas jika data lama masih berupa string tunggal
+        initialTypes = [initialData.type];
+      }
+
       setFormData({
         id: initialData.id,
         name: initialData.name || "",
-        type: initialData.type || "",
+        type: initialTypes,
         owner: initialData.owner || "",
         email: initialData.email || "",
         phone: initialData.phone || "",
         description: initialData.description || "",
         maps: initialData.maps || "",
       });
-      // Pastikan images juga memiliki fallback jika kosong
       setExistingImageUrls(initialData.images || []);
     }
   }, [initialData]);
@@ -68,8 +76,14 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, type: value }));
+  // --- CHANGE 3: Handler baru untuk multi-select ---
+  const handleTypeChange = (value: string) => {
+    setFormData((prev) => {
+      const newTypes = prev.type.includes(value)
+        ? prev.type.filter((t) => t !== value) // Hapus jika sudah ada
+        : [...prev.type, value]; // Tambahkan jika belum ada
+      return { ...prev, type: newTypes };
+    });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,9 +114,15 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
     e.preventDefault();
     setError(null);
 
-    const requiredFields: (keyof typeof formData)[] = ['name', 'type', 'owner', 'phone', 'description', 'maps'];
+    // --- CHANGE 5: Validasi diperbarui untuk array 'type' ---
+    const requiredFields: (keyof Omit<typeof formData, 'type' | 'email' | 'id'>)[] = ['name', 'owner', 'phone', 'description', 'maps'];
     if (requiredFields.some(field => !formData[field])) {
       setError("Harap isi semua kolom yang wajib diisi.");
+      return;
+    }
+
+    if (formData.type.length === 0) {
+      setError("Harap pilih setidaknya satu tipe kerajinan.");
       return;
     }
 
@@ -120,16 +140,10 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
           selectedImages.map(file => uploadImage(file))
         );
       }
-
       const finalImageUrls = [...existingImageUrls, ...newImageUrls];
-
-      const craftData = {
-        ...formData,
-        images: finalImageUrls,
-      };
+      const craftData = { ...formData, images: finalImageUrls };
 
       await updateCraft(initialData.id, craftData);
-
       alert("Kerajinan berhasil diperbarui!");
       router.push("/dashboard");
 
@@ -144,6 +158,12 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
     }
   };
 
+  // Helper untuk menampilkan label tipe yang dipilih
+  const selectedTypeLabels = craftTypeOptions
+    .filter(option => formData.type.includes(option.value))
+    .map(option => option.label)
+    .join(', ');
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-6 bg-white rounded-sm border ">
@@ -152,26 +172,39 @@ const DashboardAssetsEditForm = ({ initialData }: AssetsEditFormProps) => {
           <Label htmlFor="name">Craft Name <span className="text-red-500">*</span></Label>
           <Input id="name" name="name" required value={formData.name} placeholder="Craft Name" onChange={handleInputChange} />
         </div>
-        {/* Tipe Kerajinan */}
+
+        {/* --- CHANGE 4: Ganti Select dengan DropdownMenu --- */}
         <div>
           <Label htmlFor="type">Craft Type <span className="text-red-500">*</span></Label>
-          <Select name="type" value={formData.type} onValueChange={handleSelectChange} required>
-            <SelectTrigger><SelectValue placeholder="Select an asset type" /></SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Craft Types</SelectLabel>
-                {craftTypeOptions.map((type) => (
-                  <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full justify-start font-normal text-left h-auto min-h-10">
+                {selectedTypeLabels || "Pilih tipe kerajinan"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-full">
+              <DropdownMenuLabel>Craft Types</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {craftTypeOptions.map((type) => (
+                <DropdownMenuCheckboxItem
+                  key={type.value}
+                  checked={formData.type.includes(type.value)}
+                  onCheckedChange={() => handleTypeChange(type.value)}
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  {type.label}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
+
         {/* Email */}
         <div>
           <Label htmlFor="email">Email Service</Label>
           <Input id="email" type="email" name="email" value={formData.email} placeholder="Email" onChange={handleInputChange} />
         </div>
+        {/* ... sisa form tidak berubah ... */}
         {/* Telepon */}
         <div>
           <Label htmlFor="phone">Phone Service <span className="text-red-500">*</span></Label>

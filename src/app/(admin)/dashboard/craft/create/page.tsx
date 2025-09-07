@@ -4,15 +4,6 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import Image from "next/image"
 import { Loader2, X } from "lucide-react"
 import { deleteImage, uploadImage } from "@/lib/supabase"
@@ -21,13 +12,14 @@ import { createCraft } from "@/components/featured/dashboard/services/craft.serv
 import { useRouter } from "next/navigation"
 import { Textarea } from "@/components/ui/textarea"
 import { craftTypeOptions } from "@/components/featured/dashboard/lib/constants"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 const AssetsCreatePage = () => {
   const [selectedImages, setSelectedImages] = useState<File[]>([])
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
   const [formData, setFormData] = useState({
     name: "",
-    type: "",
+    type: [] as string[],
     owner: "",
     email: "",
     phone: "",
@@ -38,15 +30,20 @@ const AssetsCreatePage = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  // Handler gabungan untuk Input dan Textarea
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, type: value }));
+  const handleTypeChange = (value: string) => {
+    setFormData((prev) => {
+      const newTypes = prev.type.includes(value)
+        ? prev.type.filter((t) => t !== value) // Remove if already selected
+        : [...prev.type, value]; // Add if not selected
+      return { ...prev, type: newTypes };
+    });
   };
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
@@ -70,7 +67,7 @@ const AssetsCreatePage = () => {
     e.preventDefault();
     setError(null);
 
-    const requiredFields: (keyof typeof formData)[] = ['name', 'type', 'owner', 'phone', 'description', 'maps'];
+    const requiredFields: (keyof Omit<typeof formData, 'type' | 'email'>)[] = ['name', 'owner', 'phone', 'description', 'maps'];
     const missingField = requiredFields.find(field => !formData[field]);
 
     if (missingField) {
@@ -120,6 +117,11 @@ const AssetsCreatePage = () => {
     }
   };
 
+  const selectedTypeLabels = craftTypeOptions
+    .filter(option => formData.type.includes(option.value))
+    .map(option => option.label)
+    .join(', ');
+
   return (
     <div className="container max-w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-6 bg-white rounded-sm border ">
@@ -131,17 +133,27 @@ const AssetsCreatePage = () => {
         {/* Tipe Kerajinan */}
         <div>
           <Label htmlFor="type">Craft Type <span className="text-red-500">*</span></Label>
-          <Select name="type" onValueChange={handleSelectChange} required>
-            <SelectTrigger className="w-full"><SelectValue placeholder="Select an asset type" /></SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Craft Types</SelectLabel>
-                {craftTypeOptions.map((type) => (
-                  <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full justify-start font-normal">
+                {selectedTypeLabels || "Select asset types"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-full">
+              <DropdownMenuLabel>Craft Types</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {craftTypeOptions.map((type) => (
+                <DropdownMenuCheckboxItem
+                  key={type.value}
+                  checked={formData.type.includes(type.value)}
+                  onCheckedChange={() => handleTypeChange(type.value)}
+                  onSelect={(e) => e.preventDefault()} // Prevents menu from closing on select
+                >
+                  {type.label}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         {/* Email */}
         <div>

@@ -17,7 +17,7 @@ const getCraftData = unstable_cache(
   },
   ['craft'],
   {
-    revalidate: 120,
+    revalidate: 1,
   }
 )
 
@@ -53,19 +53,22 @@ export default async function Home() {
           <section id="gallery">
             <div className="grid md:grid-cols-4 gap-6 w-full">
               {fetchData && fetchData.length > 0 ? (
-                fetchData.map((item) => (
-                  <Link key={item.id} href={`/craft/${item.slug}`}>
-                    <GalleryCard
-                      badgeColor={craftTypeOptions.find((type) => type.value === item.type)?.color ?? "bg-secondary"}
-                      imgSrc={item.images[0]}
-                      cardTitle={item.name}
-                      cardDescription={item.description}
-                      badgeType={item.type}
-                    />
-                  </Link>
-                ))
+                fetchData.slice(0, 4).map((item) => {
+                  const firstType = item.type && item.type.length > 0 ? item.type[0] : "";
+                  
+                  return (
+                    <Link key={item.id} href={`/craft/${item.slug}`}>
+                      <GalleryCard
+                        badgeColor={craftTypeOptions.find((type) => type.value === firstType)?.color ?? "bg-secondary"}
+                        imgSrc={item.images[0]}
+                        cardTitle={item.name}
+                        cardDescription={item.description}
+                        badgeType={firstType}
+                      />
+                    </Link>
+                  );
+                })
               ) : (
-                // Tampilkan div ini jika tidak ada data
                 <div className="col-span-4 text-center text-gray-500 py-10">
                   <p>Tidak ada kerajinan yang tersedia untuk ditampilkan saat ini.</p>
                 </div>

@@ -1,6 +1,6 @@
 export type Craft = {
     name: string
-    type: string
+    type: string[]
     owner: string
     email: string
     phone: string
@@ -13,7 +13,7 @@ export type Craft = {
 export type CraftWithoutSlug = {
     id: string
     name: string
-    type: string
+    type: string[]
     owner: string
     email: string
     phone: string

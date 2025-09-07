@@ -67,8 +67,8 @@ async function CraftGrid({ category }: { category: string }) {
             imgSrc={item.images[0]}
             cardTitle={item.name}
             cardDescription={item.description}
-            badgeType={item.type}
-            badgeColor={craftTypeOptions.find((type) => type.value === item.type)?.color ?? "bg-secondary"}
+            badgeType={category}
+            badgeColor={craftTypeOptions.find((type) => type.value === category)?.color ?? "bg-secondary"}
           />
         </Link>
       ))}
