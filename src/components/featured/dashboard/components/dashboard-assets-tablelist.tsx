@@ -25,7 +25,7 @@ const DashboardAssetsTableList = () => {
                         response.map((craft) => ({
                             id: craft.id,
                             name: craft.name,
-                            type: craft.type,
+                            type: craft.type.join(", "),
                             owner: craft.owner,
                             email: craft.email,
                             phone: craft.phone,
