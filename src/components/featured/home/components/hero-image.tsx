@@ -64,7 +64,7 @@ const HeroImage = ({ images, image, isDisplayed }: HeroImageProps) => {
           <Button
             size="lg"
             variant="outline"
-            className="bg-transparent text-white border-2 border-white rounded-3xl transition-all duration-300 hover:bg-white hover:text-black mt-8 shadow-2xl"
+            className="bg-transparent text-white border border-white rounded-3xl transition-all duration-300 hover:bg-white hover:text-black mt-8 shadow-2xl"
             onClick={handleScrollById}
           >
             Jelajahi Kerajinan
