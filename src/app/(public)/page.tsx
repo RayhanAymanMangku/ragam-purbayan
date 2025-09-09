@@ -22,7 +22,20 @@ const craftData = getAllCraftGallery()
 // )
 
 export default async function Home() {
-
+  const heroImage = [
+      {
+        src: "/assets/depan.JPG",
+        title: "Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
+      },
+      {
+        src: "/assets/aula.JPG",
+        title: "Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
+      },
+      {
+        src: "/assets/bangsal.JPG",
+        title: "Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
+      },
+  ]
   const fetchData = await craftData
 
   return (
@@ -33,8 +46,7 @@ export default async function Home() {
       <section>
         <HeroImage
           isDisplayed={true}
-          title="Jelajahi Ragam Kerajinan di Kelurahan Purbayan"
-          src="/assets/depan.JPG"
+          images={heroImage}
         />
       </section>
 
