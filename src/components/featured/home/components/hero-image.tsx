@@ -56,7 +56,7 @@ const HeroImage = ({ images, image, isDisplayed }: HeroImageProps) => {
 
       {/* Content overlay */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
-        <h1 className="text-2xl md:text-6xl lg:text-7xl font-bold text-white text-center max-w-6xl leading-tight px-8 py-6 transition-opacity duration-1000 drop-shadow-2xl">
+        <h1 className="text-2xl md:text-6xl lg:text-7xl font-bold text-white text-center w-full md:max-w-6xl leading-tight md:px-8 md:py-6 transition-opacity duration-1000 drop-shadow-2xl">
           {currentImage?.title || "Hero Title"}
         </h1>
 
