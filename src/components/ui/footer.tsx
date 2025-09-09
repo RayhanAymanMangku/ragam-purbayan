@@ -32,8 +32,9 @@ export default function Footer() {
     return (
         <footer className="w-full border-t border-gray-200 bg-white">
             <div className="mx-auto w-full px-4 py-10 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                    {/* Company Info */}
+                {/* --- PERUBAHAN 1: Grid utama diubah menjadi lebih sederhana --- */}
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {/* Company Info (tetap sama) */}
                     <div className="space-y-4">
                         <Link href="/" className="flex items-center gap-2">
                             <Image
@@ -63,46 +64,48 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Tautan Cepat</h3>
-                        <ul className="space-y-2">
-                            {nav.map((item) => {
-                                return (
-                                    <li key={item.id}>
-                                        <Link href={item.href} className="text-sm text-gray-600 hover:text-gray-900">
-                                            {item.title}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
+                    {/* --- PERUBAHAN 2: Wrapper baru untuk tautan dengan grid 2 kolom --- */}
+                    <div className="grid grid-cols-2 gap-8">
+                        {/* Quick Links */}
+                        <div>
+                            <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Tautan Cepat</h3>
+                            <ul className="space-y-2">
+                                {nav.map((item) => {
+                                    return (
+                                        <li key={item.id}>
+                                            <Link href={item.href} className="text-sm text-gray-600 hover:text-gray-900">
+                                                {item.title}
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
 
-                    {/* Services */}
-                    <div>
-                        <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Kerajinan Lokal</h3>
-                        <ul className="space-y-2">
-                            <li>
-                                <Link href="/craft" className="text-sm text-gray-600 hover:text-gray-900">
-                                    Logam
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/craft" className="text-sm text-gray-600 hover:text-gray-900">
-                                    Silver
-                                </Link>
-                            </li>
-                        </ul>
+                        {/* Services */}
+                        <div>
+                            <h3 className={`mb-4 text-sm font-semibold tracking-wider text-gray-900 `}>Kerajinan Lokal</h3>
+                            <ul className="space-y-2">
+                                <li>
+                                    <Link href="/craft" className="text-sm text-gray-600 hover:text-gray-900">
+                                        Logam
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/craft" className="text-sm text-gray-600 hover:text-gray-900">
+                                        Silver
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                {/* Social Media & Copyright */}
+                {/* Social Media & Copyright (tetap sama) */}
                 <div className="mt-8 border-t border-gray-200 pt-8">
                     <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
                         <div className="flex space-x-6">
-
                             <Link href="https://www.instagram.com/mekanuma/?hl=en" className="text-gray-600 hover:text-gray-900" target='_blank' rel='noopener noreferrer'>
                                 <span className="sr-only">Instagram</span>
                                 {/* <FaInstagram className="h-5 w-5" /> */}
@@ -111,11 +114,9 @@ export default function Footer() {
                                 <span className="sr-only">Tiktok</span>
                                 {/* <FaTiktok className="h-5 w-5" /> */}
                             </Link>
-
                         </div>
                         <div className="flex flex-col items-center space-y-2 text-sm text-gray-600 md:flex-row md:space-x-4 md:space-y-0">
                             <span>© {new Date().getFullYear()} Purbayancraft. All rights reserved.</span>
-
                         </div>
                     </div>
                 </div>
