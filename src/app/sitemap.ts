@@ -1,5 +1,5 @@
 export default async function sitemap() {
-    const baseUrl = "https://purbayancraft.vercel.app"
+    const baseUrl = "https://purbayancraft.id"
 
     return [
         {
