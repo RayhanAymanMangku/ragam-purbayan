@@ -19,7 +19,7 @@ const craftData = getAllCraftGallery()
 //   {
 //     revalidate: 1,
 //   }
-// ) Purbayan Craft: Pengembangan Website Promosi Potensi Kerajinan Purbayan
+// )
 
 export default async function Home() {
 
