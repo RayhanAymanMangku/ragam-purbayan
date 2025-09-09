@@ -21,12 +21,16 @@ export function Navbar() {
             href: "/"
         },
         {
-            id: 1,
+            id: 2, name: "Kerajinan",
+            href: "/craft"
+        },
+        {
+            id: 3,
             name: "Profil Kelurahan",
             href: "/profile"
         },
         {
-            id: 1,
+            id: 4,
             name: "Kontak Kelurahan",
             href: "/contact"
         },
