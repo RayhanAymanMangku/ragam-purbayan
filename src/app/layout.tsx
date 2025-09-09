@@ -47,7 +47,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/x-icon" sizes="12x12" href="/assets/logo-pemkot.png"/>
+        <link rel="icon" type="image/x-icon" sizes="32x32" href="/assets/logo-pemkot.png"/>
       </head>
       <body
         className={cn("font-sans", heliosfont.variable, inter.variable)}

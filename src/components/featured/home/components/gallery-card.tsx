@@ -30,7 +30,7 @@ const GalleryCard = ({ imgSrc, cardTitle, cardDescription, badgeType, badgeColor
             {cardDescription.split(" ").slice(0, 12).join(" ")}...
           </p>
         </div>
-        <Badge variant="secondary" className={`self-start ${badgeColor}`}>
+        <Badge variant="secondary" className={`self-start ${badgeColor} capitalize`}>
           {badgeType}
         </Badge>
       </div>

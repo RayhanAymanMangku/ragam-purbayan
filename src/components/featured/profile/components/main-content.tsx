@@ -22,7 +22,7 @@ const MainContent = ({ description, geography, references, otherInfo }: ProfileP
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                            <p className="text-justify justify-evenly text-wrap text-gray-500">{description}</p>
+                            <p className="text-justify justify-evenly text-wrap">{description}</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
@@ -35,7 +35,7 @@ const MainContent = ({ description, geography, references, otherInfo }: ProfileP
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                            <p className="text-justify justify-evenly text-wrap text-gray-500">{geography}</p>
+                            <p className="text-justify justify-evenly text-wrap">{geography}</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
@@ -48,7 +48,7 @@ const MainContent = ({ description, geography, references, otherInfo }: ProfileP
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                            <p className="text-justify justify-evenly text-wrap text-gray-500">{references}</p>
+                            <p className="text-justify justify-evenly text-wrap">{references}</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
@@ -61,7 +61,7 @@ const MainContent = ({ description, geography, references, otherInfo }: ProfileP
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                            <p className="text-justify justify-evenly text-wrap text-gray-500">{otherInfo}</p>
+                            <p className="text-justify justify-evenly text-wrap">{otherInfo}</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

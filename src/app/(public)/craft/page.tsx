@@ -21,7 +21,7 @@ const CraftPage = async () => {
       <div className="flex flex-row w-full">
         <Tabs defaultValue="logam" className="w-full">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl md:text-4xl">Cari Berdasarkan Kategori</h1>
+            <h1 className="text-2xl md:text-4xl md:text-start text-center">Cari Berdasarkan Kategori</h1>
             <div className="w-full overflow-x-auto">
               <TabsList className="w-full justify-start min-w-fit bg-transparent border-b border-gray-200 rounded-none p-0 h-auto">
                 {craftTypeOptions.map((type) => (
