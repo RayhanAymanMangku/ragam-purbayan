@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Purbayan Craft",
   },
   icons: {
-    icon: "/assets/logo-pemkot.png",
+    icon: "/assets/logo-pemkot.ico",
   },
   openGraph: {
     description: "Purbayan Craft - Beragam Kerajinan Lokal Berkualitas dari Purbayan",
@@ -47,7 +47,6 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/x-icon" sizes="32x32" href="/assets/logo-pemkot.png"/>
       </head>
       <body
         className={cn("font-sans", heliosfont.variable, inter.variable)}

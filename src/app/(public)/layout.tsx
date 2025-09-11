@@ -3,7 +3,7 @@ import { Navbar } from "@/components/ui/navbar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://purbayancraft.vercel.app"),
+  metadataBase: new URL("https://purbayancraft.id"),
   keywords: [
     "Purbayan",
     "Kelurahan Purbayan",
