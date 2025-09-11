@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { Inter } from 'next/font/google'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://purbayancraft.vercel.app"),
+  metadataBase: new URL("https://purbayancraft.id"),
   keywords: [
     "Purbayan",
     "Kelurahan Purbayan",
