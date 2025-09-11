@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Kerajinan Lokal",
     "Kerajinan Lokal Purbayan",
     "Kerajinan Purbayan",
+    "Perak Purbayan Kotagede",
+    "Pengrajin Perhiasan Logam",
+    "Pengrajin Perak Purbayan",
     "Purbayan Craft",
     "Craft Purbayan"
   ],
