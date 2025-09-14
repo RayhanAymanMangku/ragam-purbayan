@@ -12,6 +12,7 @@ export async function generateMetadata() {
       description: craft.map((item) => item.name).join(" | ") || "Kerajinan",
       images: [...craft.map((item) => item.images)],
     },
+    descrtiption: craft.map((item) => item.name).join(" | ") || "Kerajinan"
   }
 }
 
