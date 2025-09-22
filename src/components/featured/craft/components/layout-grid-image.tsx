@@ -4,8 +4,10 @@ import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/c
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import ModalImage from "./modal-image"
 import type { CardType } from "../../dashboard/types/Craft"
+import dynamic from "next/dynamic"
+
+const DynamicCraftDetailModal = dynamic(() => import("./modal-image"))
 
 export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
   const [showModal, setShowModal] = useState(false)
@@ -24,12 +26,12 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
   }
 
   return (
-    <div className="flex flex-col space-y-6">
+     <div className="flex flex-col space-y-6">
       <div className="flex w-full flex-col md:flex-row gap-4">
         <div className="w-full md:w-[70%] h-full gap-4">
           <div className="flex flex-col gap-4">
             {/* Main image - full width on mobile, left side on desktop */}
-            <div className="flex flex-col md:flex-row md:gap-4 h-[600px]">
+            <div className="flex flex-col md:flex-row md:gap-4 h-auto md:h-[600px]">
               <div className="flex-1 h-64 md:h-full">
                 <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
                   <Image
@@ -42,10 +44,10 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
               </div>
 
               {/* Thumbnails - row on mobile, column on desktop */}
-              <div className="w-full md:w-48 flex flex-row md:flex-col gap-4 mt-4 md:mt-0">
+              <div className="w-full md:w-48 flex flex-row md:flex-col gap-4 mt-4 md:mt-0 md:h-full">
                 {thumbnailCards.slice(0, 3).map((card, i) => (
-                  <div key={card.id} className="flex-1 md:flex-none">
-                    <div className="relative overflow-hidden bg-white rounded-xl h-20 md:h-32 lg:h-40 w-full">
+                  <div key={card.id} className="flex-1 md:flex-1">
+                    <div className="relative overflow-hidden bg-white rounded-xl h-20 md:h-full w-full">
                       <Image
                         src={card.thumbnail || ""}
                         className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
@@ -112,7 +114,7 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
         <p className="text-sm text-gray-500 leading-relaxed">{mainCard.description}</p>
       </div>
 
-      {selectedCard && <ModalImage isOpen={showModal} onOpenChange={setShowModal} craft={selectedCard} />}
+      {selectedCard && <DynamicCraftDetailModal isOpen={showModal} onOpenChange={setShowModal} craft={selectedCard} />}
     </div>
   )
 }

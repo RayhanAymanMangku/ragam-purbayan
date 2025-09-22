@@ -33,7 +33,7 @@ const ModalImage = ({ isOpen, onOpenChange, craft }: ModalImageProps) => {
                 <div className="">
                     <div
                         ref={imageContainerRef}
-                        className="relative aspect-square overflow-hidden rounded-xl cursor-zoom-in"
+                        className="relative aspect-square overflow-hidden rounded-md cursor-zoom-in"
                         onMouseEnter={() => setIsZoomed(true)}
                         onMouseLeave={() => setIsZoomed(false)}
                         onMouseMove={handleMouseMove}

@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function Navbar() {
+    const pathname = usePathname()
     const navLink = [
         {
             id: 1,
@@ -60,7 +62,7 @@ export function Navbar() {
                         <div className="grid gap-4 p-4">
                             <div className="grid grid-cols-1 gap-2">
                                 {navLink.map((item) => (
-                                    <Link href={item.href} key={item.name}>
+                                    <Link href={item.href} key={item.name} className={`${item.href === pathname ? "text-black/20" : ""}`}>
                                         <Button variant="ghost" className="justify-start w-full">
                                             {item.name}
                                         </Button>
@@ -88,11 +90,6 @@ export function Navbar() {
                     </div>
                 </div>
 
-                {/* <Link href="/craft">
-                    <Button variant="ghost" size="sm" className="border w-fit h-fit px-2 py-1 rounded-3xl bg-transparent text-black hidden md:block">
-                        Jelajahi Kerajinan
-                    </Button>
-                </Link> */}
                 <svg width="25" height="25" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <filter id="drop-shadow">
