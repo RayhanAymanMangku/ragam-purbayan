@@ -33,6 +33,18 @@ export type CraftDisplay = {
         images: string[]
 }
 
+export type CardType = {
+  id: string
+  owner: string
+  className: string
+  thumbnail: string
+  email: string
+  phone: string
+  maps: string
+  name: string
+  description: string
+}
+
 export interface CraftData {
     id: string,
     name: string,

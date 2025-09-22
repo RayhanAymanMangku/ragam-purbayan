@@ -3,20 +3,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
-
-type CardType = {
-  id: string
-  owner: string
-  className: string
-  thumbnail: string
-  email: string
-  phone: string
-  maps: string
-  name: string
-  description: string
-}
+import { useState } from "react"
+import ModalImage from "./modal-image"
+import type { CardType } from "../../dashboard/types/Craft"
 
 export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
+  const [showModal, setShowModal] = useState(false)
+  const [selectedCard, setSelectedCard] = useState<CardType | null>(null)
+
   if (!cards || cards.length < 0) {
     return <div className="w-full h-full p-4">No images to display</div>
   }
@@ -24,35 +18,45 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
   const mainCard = cards[0] // First card as main image
   const thumbnailCards = cards.slice(1, 5) // Next 4 cards as thumbnails
 
+  const handleClickCard = (card: CardType) => {
+    setSelectedCard(card)
+    setShowModal(true)
+  }
+
   return (
     <div className="flex flex-col space-y-6">
       <div className="flex w-full flex-col md:flex-row gap-4">
         <div className="w-full md:w-[70%] h-full gap-4">
-          <div className="flex gap-4 h-[400px] md:h-[600px]">
-            <div className="flex-1">
-              <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
-                <Image
-                  src={mainCard?.thumbnail || "/placeholder.svg"}
-                  className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
-                  alt="main image"
-                  fill
-                />
-              </div>
-            </div>
-
-            <div className="w-24 md:w-48 flex flex-col gap-4">
-              {thumbnailCards.map((card, i) => (
-                <div key={card.id} className="flex-1">
-                  <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
-                    <Image
-                      src={card.thumbnail || "/placeholder.svg"}
-                      className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
-                      alt={`thumbnail ${i + 1}`}
-                      fill
-                    />
-                  </div>
+          <div className="flex flex-col gap-4">
+            {/* Main image - full width on mobile, left side on desktop */}
+            <div className="flex flex-col md:flex-row md:gap-4 h-[600px]">
+              <div className="flex-1 h-64 md:h-full">
+                <div className="relative overflow-hidden bg-white rounded-xl h-full w-full">
+                  <Image
+                    src={mainCard?.thumbnail || ""}
+                    className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
+                    alt="main image"
+                    fill
+                  />
                 </div>
-              ))}
+              </div>
+
+              {/* Thumbnails - row on mobile, column on desktop */}
+              <div className="w-full md:w-48 flex flex-row md:flex-col gap-4 mt-4 md:mt-0">
+                {thumbnailCards.slice(0, 3).map((card, i) => (
+                  <div key={card.id} className="flex-1 md:flex-none">
+                    <div className="relative overflow-hidden bg-white rounded-xl h-20 md:h-32 lg:h-40 w-full">
+                      <Image
+                        src={card.thumbnail || ""}
+                        className="object-cover object-center h-full w-full transition-transform duration-200 hover:scale-105"
+                        alt={`thumbnail ${i + 1}`}
+                        onClick={() => handleClickCard(card)}
+                        fill
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -107,6 +111,8 @@ export const LayoutGrid = ({ cards }: { cards: CardType[] }) => {
         <h1 className="text-xl md:text-2xl font-semibold">{mainCard.name}</h1>
         <p className="text-sm text-gray-500 leading-relaxed">{mainCard.description}</p>
       </div>
+
+      {selectedCard && <ModalImage isOpen={showModal} onOpenChange={setShowModal} craft={selectedCard} />}
     </div>
   )
 }
