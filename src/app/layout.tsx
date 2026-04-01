@@ -3,6 +3,7 @@ import { cn, heliosfont } from "@/lib/utils";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { Inter } from 'next/font/google'
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://purbayancraft.id"),
@@ -52,6 +53,8 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2874978027122303"
+          crossOrigin="anonymous" strategy="afterInteractive" />
       </head>
       <body
         className={cn("font-sans", heliosfont.variable, inter.variable)}
